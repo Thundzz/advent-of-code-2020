@@ -17,10 +17,10 @@ object DayTwo extends App {
   }
 
   def parseResource(resourcePath: String): Try[List[Input]] =
-    Helpers.sequence(Source.fromResource(resourcePath).getLines.map(parseRecord).toList)
+    Helpers.sequence(Source.fromResource(resourcePath).getLines().map(parseRecord).toList)
 
   def countCheck(input: Input): Boolean = {
-    val counts = input.password.groupBy(identity).mapValues(_.length)
+    val counts = input.password.toSeq.groupBy(identity).view.mapValues(_.length)
     val mini = input.fst
     val maxi = input.snd
     counts.getOrElse(input.char, 0) >= mini && counts.getOrElse(input.char, 0) <= maxi

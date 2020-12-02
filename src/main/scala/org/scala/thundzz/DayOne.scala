@@ -26,7 +26,7 @@ object DayOne extends App {
   }
 
   def parseResource(resourcePath: String): List[Int] =
-    Source.fromResource(resourcePath).getLines.map(_.toInt).toList
+    Source.fromResource(resourcePath).getLines().map(_.toInt).toList
 
   val input = parseResource("day_01/input.txt")
   println(solveFirst(input))
