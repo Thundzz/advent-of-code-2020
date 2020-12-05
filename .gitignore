@@ -16,7 +16,10 @@ project/plugins/project/
 # Scala-IDE specific
 .scala_dependencies
 .worksheet
-.idea
+.idea/codeStyles/
+.idea/libraries/
+.idea/
+.bsp/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
