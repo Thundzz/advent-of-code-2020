@@ -5,6 +5,11 @@ import scala.util.matching.Regex
 
 object DayFour extends App {
 
+  /**
+   * Credit : this scala implementation was heavily inspired by @floh0's python solution for this problem.
+   * https://github.com/floh0/advent-of-code-2020/blob/master/day4.py
+   */
+
   sealed trait ValidationRule {
     def check(value: String): Boolean
   }
