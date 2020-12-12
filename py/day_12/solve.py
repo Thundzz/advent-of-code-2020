@@ -81,6 +81,7 @@ def main():
     for instr, value in instructions:
         ship.apply(instr, value)
 
+    print(ship.distance())
     ship = WayPointShip()
     for instr, value in instructions:
         ship.apply(instr, value)
