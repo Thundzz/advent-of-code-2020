@@ -21,7 +21,6 @@ def parse_line(line):
 def parse_file(filename):
     with open(filename) as file:
         lines = file.readlines()
-
     return [ parse_line(line.strip()) for line in lines ]
 
 
@@ -31,29 +30,29 @@ def combine_mask(c1, m):
     else:
         return m
 
-
 def apply(value, mask):
     bin_val = format(value, '#038b')[2:]
-    print(bin_val)
-    print(mask)
     st = "".join(map(combine_mask, bin_val, mask))
-    print(st)
-
-apply(11, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X")
+    return st
 
 
 def simulate(instructions):
     mem = { }
     current_mask = None
     for instr in instructions:
-        pass
-
-
-
+        if type(instr) == Mask:
+            current_mask = instr.value
+        else:
+            mem[instr.addr] = apply(instr.value, current_mask)
+    s = 0
+    for addr, value in mem.items():
+        s += int(value, 2)
+    return s
 
 def main():
-    instructions = parse_file("test.txt")
-    simulate(instructions)
+    instructions = parse_file("input.txt")
+    s = simulate(instructions)
+    print(s)
 
 
 if __name__ == '__main__':
