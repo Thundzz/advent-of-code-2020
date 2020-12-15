@@ -2,9 +2,6 @@ from collections import defaultdict
 
 def play(starting_numbers, until):
     memory = defaultdict(list)
-    for key in memory:
-        memory[key] = []
-
     for idx, num in enumerate(starting_numbers):
         memory[num].append(idx + 1)
 
