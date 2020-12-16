@@ -73,7 +73,10 @@ def compatibility_matrix(rules, tickets):
             compat_matrix[position, rule_idx] = v
     return compat_matrix
 
-def sorted_positions(n, compat):        
+def sorted_positions(n, compat):
+    """
+    Sorts positions in the order of the most restrictive to the least restrictive.
+    """
     return sorted(range(n), key= lambda pos: np.count_nonzero(compat[pos, :] == 1))
 
 def find_mapping(rules, tickets):
@@ -84,18 +87,28 @@ def find_mapping(rules, tickets):
     candidate_rules = set(range(len(rules)))
     last_solution = []
     def backtrack():
+        """
+        This is probably not needed because it seems that there are positions 
+        with each number of possible compatible rules.
+        Consequently, it should be possible to find a solution by eliminating possibilities one by one.
+
+        This backtracking approach is more generic though and would be able to solve
+        more "mean" inputs.
+
+        cf : https://www.youtube.com/watch?v=G_UYXzGuqvM for a computerphile episode on backtracking.
+        """
         for position in positions:
             if solution[position] == -1:
                 for rule_idx in candidate_rules:
                     if compat[position, rule_idx] == 1:
                         solution[position] = rule_idx
                         candidate_rules.remove(rule_idx)
-                        # print(solution)
                         backtrack()
                         solution[position] = -1
                         candidate_rules.add(rule_idx)
                 return 
         last_solution.append(np.array(solution).tolist())
+
     backtrack()
     return last_solution[0]
 
